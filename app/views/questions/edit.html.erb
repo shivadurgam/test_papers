@@ -1,50 +1,7 @@
 
 <h1>Editing Question</h1>
 <div class="jumbotron">
-<%= form_for(@question) do |f| %>
-  <% if @question.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
-
-      <ul>
-      <% @question.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :q1 %><br>
-    <%= f.text_area :q1, size: "60x6", placeholder: "your text here" %>
-  </div>
-  <div class="field">
-    <%= f.label :ans1 %><br>
-    <%= f.text_field :ans1, size: "60x3", placeholder: "your text here" %>
-  </div>
-  <div class="field">
-    <%= f.label :ans2 %><br>
-    <%= f.text_field :ans2, size: "60x3", placeholder: "your text here" %>
-  </div>
-  <div class="field">
-    <%= f.label :ans3 %><br>
-    <%= f.text_field :ans3, size: "60x3", placeholder: "your text here" %>
-  </div>
-  <div class="field">
-    <%= f.label :ans4 %><br>
-    <%= f.text_field :ans4, size: "60x3", placeholder: "your text here" %>
-  </div>
-  <div class="field">
-    <%= f.label :correct_ans %><br>
-    <%= f.select :correct_ans, [@question.ans1, @question.ans2, @question.ans3, @question.ans4], :class => "form_control" %>  
-  </div>
-  
-  <div class="actions">
-    <%= f.submit :class => "btn btn-primary" %>
-  </div>
-<% end %>
-
-
+<%= render 'form' %>
 <%= link_to 'Show', @question %> |
 <%= link_to 'Back', questions_path %>
 <br />

@@ -11,12 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326085357) do
+ActiveRecord::Schema.define(version: 20150408093018) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  create_table "exams", force: :cascade do |t|
+    t.text     "answers"
+    t.string   "opt1"
+    t.string   "opt2"
+    t.string   "opt3"
+    t.string   "opt4"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "question_id"
+  end
 
-  create_table "models", force: :cascade do |t|
+  add_index "exams", ["question_id"], name: "index_exams_on_question_id"
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "q1"
+    t.string   "ans1"
+    t.string   "ans2"
+    t.string   "ans3"
+    t.string   "ans4"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "correct_ans"
+    t.string   "ans_check"
+  end
+
+  create_table "tests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tests", ["user_id"], name: "index_tests_on_user_id"
+
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -31,27 +61,7 @@ ActiveRecord::Schema.define(version: 20150326085357) do
     t.datetime "updated_at"
   end
 
-  add_index "models", ["email"], name: "index_models_on_email", unique: true, using: :btree
-  add_index "models", ["reset_password_token"], name: "index_models_on_reset_password_token", unique: true, using: :btree
-
-  create_table "questions", force: :cascade do |t|
-    t.string   "q1"
-    t.string   "ans1"
-    t.string   "ans2"
-    t.string   "ans3"
-    t.string   "ans4"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.text     "correct_ans"
-    t.string   "ans_check"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "sex"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

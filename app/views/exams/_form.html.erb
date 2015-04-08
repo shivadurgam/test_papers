@@ -1,0 +1,42 @@
+<div class="test-head"><h3>Online Assessment Mock Test</h3></div><br /> <br />
+
+
+    <%= bootstrap_form_for @exam do |exam| %>
+    <ol type="1">
+              <% if @exam.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@exam.errors.count, "error") %> prohibited this exam from being saved:</h2>
+
+                <ul>
+                <% @exam.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+                </ul>
+              </div>
+              <% end %>
+
+          
+          
+            
+              <li><h4>Question: <%= @question.q1 %> </h4></li><br /><br />
+              <div>
+              <ol type="A">
+
+              <%= exam.hidden_field :question_id, value: @question.id %>
+              <li><%= exam.check_box :answers, {multiple: true, label: @question.ans1}, 1, nil %></li><br />
+              <li><%= exam.check_box :answers, {multiple: true, label: @question.ans2}, 2, nil %></li><br />
+              <li><%= exam.check_box :answers, {multiple: true, label: @question.ans3}, 3, nil %></li><br />
+              <li><%= exam.check_box :answers, {multiple: true, label: @question.ans4}, 4, nil %></li><br />
+              </ol>
+              </div>
+            
+
+          </ol>
+          <%= exam.submit 'Submit' %><br />
+   
+    
+<% end %>
+
+
+
+</div>

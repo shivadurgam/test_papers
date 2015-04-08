@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!
+
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   # GET /papers
@@ -71,6 +73,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:q1, :ans1, :ans2, :ans3, :ans4, :correct_ans, :ans_check)
+      params.require(:question).permit(:exam_id, :q1, :ans1, :ans2, :ans3, :ans4, :ans_check, correct_ans: [])
     end
 end

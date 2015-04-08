@@ -1,0 +1,82 @@
+
+
+    <% if @exam.answers == @question.correct_ans %>
+    <h3>Correct Answer!</h3>
+    <% else %>
+    <h3>Wrong Answer!</h3>
+
+      flash[:success] = "Correct answer"
+      redirect_to new_exam_path
+      else
+      flash[:error] = "Wrong answer"
+      redirect_to new_exam_path
+      end
+
+def set_question
+      @question = Question.order("RANDOM()").limit(10)
+  end
+
+
+
+
+      <p id="notice"><%= notice %></p>
+
+<div class="test-head"><h3>Online Assessment Mock Test</h3></div><br /> <br />
+
+
+    <%= form_for @exam do |exam| %>
+          <ol type="A">
+          <h4>Question: <%= @question.q1 %> </h4><br /><br />
+            <li><%= exam.check_box :answers, {multiple: true, label: @question.ans1}, 1, nil %>
+            <%= @question.ans1 %></li><br />
+            <li><%= exam.check_box :answers, {multiple: true, label: @question.ans2}, 2, nil %>
+            <%= @question.ans2 %></li><br />
+            <li><%= exam.check_box :answers, {multiple: true, label: @question.ans3}, 3, nil %>
+            <%= @question.ans3 %></li><br />
+            <li><%= exam.check_box :answers, {multiple: true, label: @question.ans4}, 4, nil %>
+            <%= @question.ans4 %></li><br />
+
+          </ol>
+          <%= exam.submit 'Submit' %><br />
+   
+    <% end %> 
+
+ 
+
+</div>
+
+ 
+
+def create
+
+    @exam = Exam.new(exam_params)
+    
+    $num = 0
+     
+    if @exam.save
+      
+      @question.each do |question|
+          if @exam.answers == question.correct_ans
+            $num += 1
+          end
+      end
+
+      redirect_to new_exam_path, :flash => {:success => "You scored #{$num} out of 10"}
+    
+    else
+      flash[:error] = "Choose atleast one option"
+      redirect_to new_exam_path
+    end
+  end
+
+  private
+  def exam_params
+      params.require(:exam).permit(:question_id, :opt1, :opt2, :opt3, :opt4, answers: [])
+  end
+
+  def set_question
+      @question = Question.order("RANDOM()").limit(10)
+      #@question = Question.offset(rand(Question.count)).first
+  end
+end
+

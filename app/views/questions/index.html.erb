@@ -16,7 +16,7 @@
     <% for i in 0..@num %>
     <tr>
      <td><strong> <%= (i+1) %>. &nbsp <%= simple_format(@questions[i].q1) %></strong><br /><br />
-          <ol type="A"><li><%= @questions[i].ans1 %></li><br />
+          <ol type="1"><li><%= @questions[i].ans1 %></li><br />
           <li><%= @questions[i].ans2 %></li><br />
           <li><%= @questions[i].ans3 %></li><br />
           <li><%= @questions[i].ans4 %></li><br />

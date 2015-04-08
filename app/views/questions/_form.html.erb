@@ -1,5 +1,5 @@
 <div class="jumbotron">
-<%= form_for @question, :html => {:class => "form-horizontal center"} do |f| %>
+<%= bootstrap_form_for @question, :html => {:class => "form-horizontal center"} do |f| %>
   <% if @question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -13,27 +13,33 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :q1 %><br>
    <%= f.text_area :q1, size: "60x6", placeholder: "your text here" %>
   </div>
   <div class="form-group">
-    <%= f.label :ans1 %><br>
     <%= f.text_field :ans1, size: "60x3", placeholder: "your text here" %>
   </div>
   <div class="form-group">
-    <%= f.label :ans2 %><br>
     <%= f.text_field :ans2, size: "60x3", placeholder: "your text here" %>
   </div>
   <div class="form-group">
-    <%= f.label :ans3 %><br>
     <%= f.text_field :ans3, size: "60x3", placeholder: "your text here" %>
   </div>
   <div class="form-group">
-    <%= f.label :ans4 %><br>
     <%= f.text_field :ans4, size: "60x3", placeholder: "your text here" %>
   </div>
-  
-  
+  <div class="form-group">
+  <div class="form-group-ans">
+  Please select the correct respnse from below: <br />
+
+    <%= f.check_box :correct_ans, { multiple: true, label: "ans1" }, 1, nil %><br />
+
+    <%= f.check_box :correct_ans, { multiple: true, label: "ans2" }, 2, nil %><br />
+
+    <%= f.check_box :correct_ans, { multiple: true, label: "ans3" }, 3, nil %><br />
+
+    <%= f.check_box :correct_ans, { multiple: true, label: "ans4" }, 4, nil %><br />
+  </div>
+  </div>
   <div class="actions">
     <%= f.submit :class => "btn btn-primary" %>
   </div>

@@ -1,38 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Questions:</h1><br /> <br />
+<%= render 'form' %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      
-    </tr>
-  </thead>
-
-  <tbody>
-  
-    <% for i in 0..@num %>
-    <tr>
-     <td><strong> <%= (i+1) %>. &nbsp <%= simple_format(@questions[i].q1) %></strong><br /><br />
-          <ol type="A">
-
-            <li> <input type="radio" >&nbsp<%= @questions[i].ans1 %></li><br />
-            <li><input type="radio" >&nbsp<%= @questions[i].ans2 %></li><br />
-            <li><input type="radio" >&nbsp<%= @questions[i].ans3 %></li><br />
-            <li><input type="radio" >&nbsp<%= @questions[i].ans4 %></li><br />
-          </ol>
-     </td>
-     <td></td>
-     
-    </tr>
-    <% end %> 
-
-  </tbody>
-</table>
-
-<br>
-
+ 
 
 

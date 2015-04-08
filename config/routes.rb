@@ -2,9 +2,10 @@ Rails.application.routes.draw do
 
 
 
-  get 'static_page/home' => "static_page#home", as: :static_home
+  resources :tests
 
-  resources :users
+  devise_for :users
+  get 'static_page/home' => "static_page#home", as: :static_home
   resources :questions
   resources :exams, :only => [:new, :create, :destroy]
   root "static_page#home"
